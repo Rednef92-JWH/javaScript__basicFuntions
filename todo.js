@@ -3,7 +3,7 @@ const toDoForm = document.querySelector(".js-toDoForm"),
    toDoList = document.querySelector(".js-toDoList");
 
 const TODO_LIST_LS = "toDoList";
-const arr_toDo = [];
+let arr_toDo = [];
 
 init();
 
@@ -13,11 +13,11 @@ function init() {
 }
 
 function loadToDoList() {
-   const typedToDoList = localStorage.getItem(TODO_LIST_LS); // I'm not sure about this part__
+   const typedToDoList = localStorage.getItem(TODO_LIST_LS); // I'm not sure about this part_
    if (typedToDoList !== null) {
       const parsedToDo = JSON.parse(typedToDoList);
       parsedToDo.forEach(function(toDo) {
-         writeToDo(toDo.text);
+         writeToDo(toDo.text); // you need to re-code cuz it's not practical_
       });
    }
 }
@@ -33,6 +33,7 @@ function writeToDo(inputValue) {
    const newList = document.createElement("li");
    const delBtn = document.createElement("button");
    delBtn.innerText = "❌";
+   delBtn.addEventListener("click", deleteToDo);
    const addedList = document.createElement("span");
    addedList.innerHTML = inputValue; // What is the different innerText and innerHTML?
 
@@ -54,4 +55,17 @@ function writeToDo(inputValue) {
 
 function saveToDoList_LS() {
    localStorage.setItem(TODO_LIST_LS, JSON.stringify(arr_toDo));
+}
+
+function deleteToDo(event) {
+   const targetBtn = event.target;
+   const targetList = targetBtn.parentNode;
+   toDoList.removeChild(targetList);
+
+   const cleanToDoList = arr_toDo.filter(function(arr_toDo) {
+      return arr_toDo.id !== parseInt(targetList.id);
+   });
+
+   arr_toDo = cleanToDoList;
+   saveToDoList_LS();
 }
