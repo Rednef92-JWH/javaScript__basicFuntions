@@ -3,6 +3,7 @@ const toDoForm = document.querySelector(".js-toDoForm"),
    toDoList = document.querySelector(".js-toDoList");
 
 const TODO_LIST_LS = "toDoList";
+const arr_toDo = [];
 
 init();
 
@@ -12,25 +13,45 @@ function init() {
 }
 
 function loadToDoList() {
-   const toDoList = localStorage.getItem(TODO_LIST_LS); // I'm not sure about this part__
-   if (toDoList !== null) {
+   const typedToDoList = localStorage.getItem(TODO_LIST_LS); // I'm not sure about this part__
+   if (typedToDoList !== null) {
+      const parsedToDo = JSON.parse(typedToDoList);
+      parsedToDo.forEach(function(toDo) {
+         writeToDo(toDo.text);
+      });
    }
 }
 
 function handlingSubmit(event) {
    event.preventDefault();
    const inputValue = toDoInput.value;
-   writeToDo(inputValue);
    toDoInput.value = "";
+   writeToDo(inputValue);
 }
 
-function writeToDo(toDo) {
+function writeToDo(inputValue) {
    const newList = document.createElement("li");
    const delBtn = document.createElement("button");
    delBtn.innerText = "❌";
    const addedList = document.createElement("span");
-   addedList.innerHTML = toDo; // What is the different innerText and innerHTML?
+   addedList.innerHTML = inputValue; // What is the different innerText and innerHTML?
+
+   const newId = arr_toDo.length + 1;
+
    newList.appendChild(delBtn);
    newList.appendChild(addedList);
    toDoList.appendChild(newList);
+
+   newList.id = newId;
+
+   const obj_toDo = {
+      text: inputValue,
+      id: newId
+   };
+   arr_toDo.push(obj_toDo);
+   saveToDoList_LS();
+}
+
+function saveToDoList_LS() {
+   localStorage.setItem(TODO_LIST_LS, JSON.stringify(arr_toDo));
 }
