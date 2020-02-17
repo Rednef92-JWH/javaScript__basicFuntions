@@ -13,7 +13,7 @@ function init() {
 }
 
 function loadToDoList() {
-   const typedToDoList = localStorage.getItem(TODO_LIST_LS); // I'm not sure about this part_
+   const typedToDoList = localStorage.getItem(TODO_LIST_LS);
    if (typedToDoList !== null) {
       const parsedToDo = JSON.parse(typedToDoList);
       parsedToDo.forEach(function(toDo) {
