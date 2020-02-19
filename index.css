@@ -1,5 +1,47 @@
-.body {
-   background-color: #ecf0f1;
+body {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+   width: 100%;
+   flex-direction: column;
+}
+
+.js-clock {
+   align-items: center;
+   margin-top: 250px;
+   margin-bottom: 5px;
+   color: white;
+   font-size: 500%;
+}
+
+.js-clock h1 {
+   margin: 0;
+}
+.greetings {
+   color: white;
+   font-size: 200%;
+   margin-top: 0;
+   margin-bottom: 20px;
+}
+
+.typedName input {
+   color: white;
+   background-color: transparent;
+   outline: none;
+   font-size: 200%;
+}
+
+.toDoForm input {
+   color: white;
+   background-color: transparent;
+   outline: none;
+   font-size: 200%;
+}
+
+.toDolist {
+   color: white;
+   font-size: 200%;
 }
 
 .typedName,

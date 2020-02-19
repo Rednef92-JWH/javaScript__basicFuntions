@@ -39,8 +39,8 @@ function writeToDo(inputValue) {
 
    const newId = arr_toDo.length + 1;
 
-   newList.appendChild(delBtn);
    newList.appendChild(addedList);
+   newList.appendChild(delBtn);
    toDoList.appendChild(newList);
 
    newList.id = newId;
